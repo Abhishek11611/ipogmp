@@ -1,11 +1,11 @@
-import { Dashboard } from './components/Dashboard'
+import { Dashboard } from './features/ipo/pages/Dashboard';
 
 const App = () => {
   return (
-    <>
-    <Dashboard/>
-    </>
-  )
-}
+    <div style={{ height: '100vh', overflow: 'auto' }}>
+      <Dashboard />
+    </div>
+  );
+};
 
-export default App
+export default App;
