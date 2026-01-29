@@ -1,0 +1,39 @@
+.table-wrapper {
+  overflow-x: auto;
+  background: #fff8d9;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th {
+  background: #f1f1f1;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e5e5;
+  white-space: nowrap;
+}
+
+tr:hover {
+  background: #fff2c2;
+}
+
+.name {
+  color: #0b5ed7;
+  font-weight: 500;
+}
+
+.updated {
+  color: #0b5ed7;
+  font-size: 12px;
+}
