@@ -1,4 +1,5 @@
-// Set VITE_API_BASE_URL in your .env file, e.g. VITE_API_BASE_URL=http://localhost:8080
+import { getAccessToken, getRefreshToken } from "../storage/tokenStorage";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8080";
 
 export class ApiError extends Error {
@@ -11,15 +12,36 @@ export class ApiError extends Error {
   }
 }
 
+interface RequestOptions {
+  /** Attach "Authorization: Bearer <accessToken>" from storage. */
+  auth?: boolean;
+  /** Attach "Refresh-Token: <refreshToken>" — for the refresh endpoint. */
+  withRefreshToken?: boolean;
+}
+
 export async function apiPost<TResponse, TBody = unknown>(
   path: string,
-  body?: TBody
+  body?: TBody,
+  options: RequestOptions = {}
 ): Promise<TResponse> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    Accept: "*/*",
+  };
+
+  if (options.auth) {
+    const token = getAccessToken();
+    if (token) headers.Authorization = `Bearer ${token}`;
+  }
+
+  if (options.withRefreshToken) {
+    const refresh = getRefreshToken();
+    if (refresh) headers["Refresh-Token"] = refresh;
+  }
+
   const response = await fetch(`${API_BASE_URL}${path}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers,
     body: body !== undefined ? JSON.stringify(body) : undefined,
   });
 
@@ -27,8 +49,6 @@ export async function apiPost<TResponse, TBody = unknown>(
   const json = text ? JSON.parse(text) : null;
 
   if (!response.ok) {
-    // BaseAPIResponse still comes through on error responses in most setups —
-    // fall back to a generic message if this one doesn't.
     const message = json?.message ?? `Request failed (${response.status})`;
     throw new ApiError(message, response.status);
   }
