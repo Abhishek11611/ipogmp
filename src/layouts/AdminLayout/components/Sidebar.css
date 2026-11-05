@@ -1,87 +1,186 @@
 .sidebar {
-  width: 248px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: var(--sidebar-width);
+  height: 100vh;
   flex-shrink: 0;
-  background: #131a2b;
-  min-height: 100vh;
-  padding: 16px 12px;
+  padding: 20px 16px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
 }
 
 .sidebar__head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px 20px;
+  gap: 11px;
+  padding: 4px 8px 20px;
 }
 
 .sidebar__logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
-  background: #2563eb;
-  color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  font-size: 15px;
   font-weight: 700;
-  font-size: 13px;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.28);
+}
+
+.sidebar__brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .sidebar__title {
-  color: #fff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--text);
 }
 
-.sidebar__section + .sidebar__section {
-  margin-top: 20px;
+.sidebar__subtitle {
+  font-size: 11.5px;
+  color: var(--text-faint);
+}
+
+.sidebar__nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+.sidebar__section {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .sidebar__section-title {
-  color: #626e8c;
-  font-size: 10.5px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0 0 8px;
+  margin: 0 0 4px;
   padding: 0 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
 }
 
 .sidebar__link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 11px;
   padding: 9px 10px;
-  border-radius: 8px;
-  color: #9aa4bd;
-  text-decoration: none;
-  font-size: 14px;
-  margin-bottom: 2px;
+  border-radius: 9px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .sidebar__link:hover {
-  background: #1e2740;
-  color: #fff;
+  background: var(--surface-muted);
+  color: var(--text);
 }
 
 .sidebar__link--active {
-  background: #273553;
-  color: #fff;
-  font-weight: 500;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.sidebar__link--active .sidebar__icon {
+  color: var(--brand);
 }
 
 .sidebar__icon {
-  width: 18px;
+  width: 20px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
+  color: var(--text-faint);
 }
 
 .sidebar__badge {
   margin-left: auto;
-  background: #1e2740;
-  color: #9aa4bd;
-  font-size: 11px;
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-soft-strong);
+  color: var(--brand);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sidebar__foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-muted);
+}
+
+.sidebar__foot-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #12b76a;
+  box-shadow: 0 0 0 3px rgba(18, 183, 106, 0.15);
+}
+
+.sidebar__foot-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.sidebar__foot-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sidebar__foot-sub {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 76px;
+    padding: 20px 10px;
+  }
+
+  .sidebar__head {
+    justify-content: center;
+    padding: 4px 0 20px;
+  }
+
+  .sidebar__title,
+  .sidebar__subtitle,
+  .sidebar__section-title,
+  .sidebar__label,
+  .sidebar__badge,
+  .sidebar__foot-meta {
+    display: none;
+  }
+
+  .sidebar__link {
+    justify-content: center;
+  }
+
+  .sidebar__foot {
+    justify-content: center;
+    padding: 10px;
+  }
 }

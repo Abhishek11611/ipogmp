@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createBrowserRouter, Navigate, Outlet, useNavigate } from "react-router-dom";
 import Login from "../features/auth/pages/Login";
 import RegisterWizard from "../features/auth/pages/registerWizard";
@@ -21,10 +22,7 @@ function LoginRoute() {
 function RegisterRoute() {
   const navigate = useNavigate();
   return (
-    <RegisterWizard
-      onSwitchToLogin={() => navigate("/login")}
-      onComplete={() => navigate("/dashboard", { replace: true })}
-    />
+    <RegisterWizard onSwitchToLogin={() => navigate("/login")} />
   );
 }
 

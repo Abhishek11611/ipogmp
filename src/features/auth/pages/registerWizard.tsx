@@ -36,10 +36,9 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface RegisterWizardProps {
   onSwitchToLogin?: () => void;
-  onComplete?: (accessToken: string) => void;
 }
 
-export default function RegisterWizard({ onSwitchToLogin, onComplete }: RegisterWizardProps) {
+export default function RegisterWizard({ onSwitchToLogin }: RegisterWizardProps) {
   const [step, setStep] = useState<Step>(1);
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
@@ -385,7 +384,9 @@ export default function RegisterWizard({ onSwitchToLogin, onComplete }: Register
             <div className="auth-success">
               <div className="auth-success__icon">✓</div>
               <h1 className="auth-panel__title">You're all set</h1>
-              <p className="auth-panel__subtitle">Your account has been created and you're logged in.</p>
+              <p className="auth-panel__subtitle">
+                Your account has been created. Taking you to log in…
+              </p>
             </div>
           )}
 
